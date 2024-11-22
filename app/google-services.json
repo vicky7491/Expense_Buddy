@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1099021724946",
+    "project_id": "expense-buddy-3e802",
+    "storage_bucket": "expense-buddy-3e802.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099021724946:android:8c95cc859a6490141857cb",
+        "android_client_info": {
+          "package_name": "dev.nitish.expensebuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKjCy0u1X61ASNOaLH64UiIPw44R8iIV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
