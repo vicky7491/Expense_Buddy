@@ -1,0 +1,11 @@
+# Exclude data files from language stats
+*.json linguist-vendored
+*.csv linguist-vendored
+
+# Exclude markdown files (documentation)
+*.md linguist-documentation
+
+# Exclude images
+*.png linguist-vendored
+*.jpg linguist-vendored
+*.jpeg linguist-vendored
