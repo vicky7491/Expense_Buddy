@@ -18,76 +18,74 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class Loginpage extends AppCompatActivity {
 
+    Button callSignUp, login_btn;
+    TextInputLayout regPhoneNo, regPassword;
 
-        Button callSignUp,login_btn;
-        TextInputLayout regPhoneNo, regUsername,regPassword;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        // This line hides the status bar from the screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_loginpage);
 
-            //This line hide the status bar from the screen
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            setContentView(R.layout.activity_loginpage);
+        // HOOKS
+        regPhoneNo = findViewById(R.id.regPhoneNo);
+        regPassword = findViewById(R.id.regPassword);
+        callSignUp = findViewById(R.id.callSignUp);
+        login_btn = findViewById(R.id.login_btn);
 
-            //HOOKS
-            regPhoneNo = findViewById(R.id.regPhoneNo);
-            regPassword = findViewById(R.id.regPassword);
-            callSignUp = findViewById(R.id.callSignUp);
-            callSignUp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                // Toast.makeText(Loginpage.this, "Navigating to SignUp", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Loginpage.this,SignUp.class);
-                    startActivity(intent);
+        callSignUp.setOnClickListener(v -> {
+            Intent intent = new Intent(Loginpage.this, SignUp.class);
+            startActivity(intent);
+        });
 
-                }
-            });
-        }
+        login_btn.setOnClickListener(v -> loginUser(v));
+    }
 
-    private Boolean validatephoneNo() {
+    public void openForgotPassword(View view) {
+        Intent intent = new Intent(Loginpage.this, ForgotPasswordActivity.class);
+        startActivity(intent);
+    }
+
+    private Boolean validatePhoneNo() {
         String value = regPhoneNo.getEditText().getText().toString();
-
         if (value.isEmpty()) {
             regPhoneNo.setError("Field cannot be empty");
             return false;
-        }
-         else {
+        } else {
             regPhoneNo.setError(null);
             regPhoneNo.setErrorEnabled(false);
             return true;
         }
     }
-    private Boolean validatepassword() {
-        String value = regPassword.getEditText().getText().toString();
 
+    private Boolean validatePassword() {
+        String value = regPassword.getEditText().getText().toString();
         if (value.isEmpty()) {
             regPassword.setError("Field cannot be empty");
             return false;
-        }
-         else {
+        } else {
             regPassword.setError(null);
             regPassword.setErrorEnabled(false);
             return true;
         }
     }
-    public void loginUser(View view){
-            //Validate Login info
-        if (!validatephoneNo() | !validatepassword()) {
+
+    public void loginUser(View view) {
+        // Validate Login info
+        if (!validatePhoneNo() | !validatePassword()) {
             return;
-        }
-        else{
+        } else {
             isUser();
         }
     }
 
     private void isUser() {
-            
-            String userEnteredPhoneNo = regPhoneNo.getEditText().getText().toString().trim();
-            String userEnteredPassword = regPassword.getEditText().getText().toString().trim();
+        String userEnteredPhoneNo = regPhoneNo.getEditText().getText().toString().trim();
+        String userEnteredPassword = regPassword.getEditText().getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUser = reference.orderByChild("phoneNo").equalTo(userEnteredPhoneNo);
@@ -133,6 +131,7 @@ public class Loginpage extends AppCompatActivity {
                     regPhoneNo.requestFocus();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ExpenseBuddy"
         tools:targetApi="31">
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExpenseActivity"
             android:exported="false" />
         <activity
